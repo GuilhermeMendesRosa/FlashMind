@@ -13,14 +13,14 @@ import {PoMenuItem, PoMenuModule} from "@po-ui/ng-components";
 export class HomeComponent {
   menus: Array<PoMenuItem> = [
     {
-      label: 'Timekeeping',
-      icon: 'ph ph-clock',
-      shortLabel: 'Timekeeping',
+      label: 'Documentos',
+      icon: 'ph ph-article',
+      shortLabel: 'Documentos',
     },
     {
-      label: 'Useful links',
-      icon: 'ph ph-share',
-      shortLabel: 'Links',
+      label: 'Coleções',
+      icon: 'ph ph-folder',
+      shortLabel: 'Coleções',
     }
   ];
 
