@@ -1,0 +1,44 @@
+{
+  "name": "flash-mind-client",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "npm run ng -- serve --host 0.0.0.0 --proxy-config proxy.conf.js",
+    "build": "npm run ng -- build --configuration production",
+    "test": "npm run ng -- test",
+    "lint": "npm run ng -- lint",
+    "e2e": "npm run ng -- e2e",
+    "aot": "npm run ng -- serve --host 0.0.0.0 --proxy-config proxy.conf.js --aot -o"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^18.2.0",
+    "@angular/common": "^18.2.0",
+    "@angular/compiler": "^18.2.0",
+    "@angular/core": "^18.2.0",
+    "@angular/forms": "^18.2.0",
+    "@angular/platform-browser": "^18.2.0",
+    "@angular/platform-browser-dynamic": "^18.2.0",
+    "@angular/router": "^18.2.0",
+    "@ckeditor/ckeditor5-angular": "^9.0.0",
+    "@po-ui/ng-components": "^18.4.0",
+    "@po-ui/ng-templates": "^18.4.0",
+    "ckeditor5": "^43.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.10"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^18.2.2",
+    "@angular/cli": "^18.2.2",
+    "@angular/compiler-cli": "^18.2.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.2.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.5.2"
+  }
+}
