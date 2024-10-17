@@ -19,7 +19,7 @@ export class LoginComponent {
   }
 
   readonly menus: Array<PoMenuItem> = [
-    {label: 'Home', action: this.onClick.bind(this)},
+    {label: 'Page', action: this.onClick.bind(this)},
   ];
 
   private onClick() {

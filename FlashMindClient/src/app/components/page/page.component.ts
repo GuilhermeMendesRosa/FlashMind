@@ -17,7 +17,7 @@ import {
 } from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
-import {PoContainerModule, PoMenuModule} from "@po-ui/ng-components";
+import {PoButtonModule, PoContainerModule, PoMenuModule} from "@po-ui/ng-components";
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,8 @@ import {PoContainerModule, PoMenuModule} from "@po-ui/ng-components";
   imports: [
     CKEditorModule,
     PoMenuModule,
-    PoContainerModule
+    PoContainerModule,
+    PoButtonModule
   ],
   templateUrl: './page.component.html',
   styleUrl: './page.component.css'
@@ -49,7 +50,6 @@ export class PageComponent {
       Italic,
       Link,
       List,
-      MediaEmbed,
       Paragraph,
       Table,
       Undo,
