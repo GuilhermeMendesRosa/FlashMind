@@ -27,10 +27,10 @@ import {PoContainerModule, PoMenuModule} from "@po-ui/ng-components";
     PoMenuModule,
     PoContainerModule
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './page.component.html',
+  styleUrl: './page.component.css'
 })
-export class HomeComponent {
+export class PageComponent {
   public Editor = ClassicEditor;
   public config = {
     toolbar: [
