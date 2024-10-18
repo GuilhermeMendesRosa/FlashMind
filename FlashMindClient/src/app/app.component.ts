@@ -1,7 +1,9 @@
 import {CommonModule} from '@angular/common';
 import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
+import {PoMenuItem, PoMenuModule} from "@po-ui/ng-components";
+import {AuthService} from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -10,10 +12,30 @@ import {LoginComponent} from "./components/login/login.component";
     CommonModule,
     RouterOutlet,
     LoginComponent,
+    PoMenuModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+
+  constructor(
+    public router: Router) {
+  }
+
+  menus: Array<PoMenuItem> = [
+    {
+      label: 'Documentos',
+      icon: 'ph ph-article',
+      shortLabel: 'Documentos',
+      link: "/documents",
+    },
+    {
+      label: 'Coleções',
+      icon: 'ph ph-folder',
+      shortLabel: 'Coleções',
+      link: "collections"
+    }
+  ];
 
 }
