@@ -1,17 +1,17 @@
-<po-container>
-  <div class="po-row">
-    <po-button
-      class="po-md-1"
-      p-label="Salvar"
-    ></po-button>
-    <po-button
-      class="po-md-1"
-      p-label="Gerar"
-    ></po-button>
-  </div>
-  <po-container class="po-p-3">
-    <div>
-      <ckeditor [editor]="Editor" [config]="config" data="<h1>Hello from  5!</h1>" style="height: 500px;"></ckeditor>
+<po-page-default p-title="Documento">
+    <div class="po-row">
+      <po-button
+        class="po-md-1"
+        p-label="Salvar"
+      ></po-button>
+      <po-button
+        class="po-md-1"
+        p-label="Gerar"
+      ></po-button>
     </div>
-  </po-container>
-</po-container>
+    <po-container class="po-p-3">
+      <div>
+        <ckeditor [editor]="Editor" [config]="config" data="<h1>Hello from  5!</h1>" style="height: 500px;"></ckeditor>
+      </div>
+    </po-container>
+</po-page-default>

@@ -17,7 +17,7 @@ import {
 } from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
-import {PoButtonModule, PoContainerModule, PoMenuModule} from "@po-ui/ng-components";
+import {PoButtonModule, PoContainerModule, PoMenuModule, PoPageModule} from "@po-ui/ng-components";
 
 @Component({
   selector: 'app-home',
@@ -26,7 +26,8 @@ import {PoButtonModule, PoContainerModule, PoMenuModule} from "@po-ui/ng-compone
     CKEditorModule,
     PoMenuModule,
     PoContainerModule,
-    PoButtonModule
+    PoButtonModule,
+    PoPageModule
   ],
   templateUrl: './page.component.html',
   styleUrl: './page.component.css'
