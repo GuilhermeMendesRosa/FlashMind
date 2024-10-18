@@ -3,7 +3,6 @@ import {Component} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
 import {PoMenuItem, PoMenuModule} from "@po-ui/ng-components";
-import {AuthService} from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
