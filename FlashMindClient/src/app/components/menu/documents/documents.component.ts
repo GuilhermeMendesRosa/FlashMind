@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import {PoPageModule} from "@po-ui/ng-components";
+import {PoContainerModule, PoPageModule, PoWidgetModule} from "@po-ui/ng-components";
 
 @Component({
   selector: 'app-documents',
   standalone: true,
   imports: [
-    PoPageModule
+    PoPageModule,
+    PoWidgetModule,
+    PoContainerModule
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.css'
