@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {PoContainerModule, PoPageModule, PoWidgetModule} from "@po-ui/ng-components";
+import {PoContainerModule, PoPageModule, PoWidgetModule, PoButtonModule} from "@po-ui/ng-components";
 
 @Component({
   selector: 'app-documents',
@@ -7,7 +7,8 @@ import {PoContainerModule, PoPageModule, PoWidgetModule} from "@po-ui/ng-compone
   imports: [
     PoPageModule,
     PoWidgetModule,
-    PoContainerModule
+    PoContainerModule,
+    PoButtonModule
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.css'

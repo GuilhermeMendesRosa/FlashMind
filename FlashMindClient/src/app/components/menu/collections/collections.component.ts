@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {PoInfoModule, PoListViewAction, PoListViewModule, PoPageModule} from "@po-ui/ng-components";
+import {PoInfoModule, PoListViewAction, PoListViewModule, PoPageModule, PoButtonModule} from "@po-ui/ng-components";
 
 @Component({
   selector: 'app-collections',
@@ -7,7 +7,8 @@ import {PoInfoModule, PoListViewAction, PoListViewModule, PoPageModule} from "@p
   imports: [
     PoPageModule,
     PoListViewModule,
-    PoInfoModule
+    PoInfoModule,
+    PoButtonModule
   ],
   templateUrl: './collections.component.html',
   styleUrl: './collections.component.css'
