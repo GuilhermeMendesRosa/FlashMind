@@ -53,5 +53,4 @@ O FlashMind é uma aplicação web inovadora inspirada no Anki, que combina a fa
   
   **📚 Transformando a maneira como você estuda 📚**
   
-  [Documentação](link-para-docs) • [Reportar Bug](link-para-issues) • [Solicitar Feature](link-para-feature-request)
 </div>
