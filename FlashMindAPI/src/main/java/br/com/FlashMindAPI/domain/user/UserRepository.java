@@ -1,4 +1,4 @@
-package br.com.FlashMind.domain.user;
+package br.com.FlashMindAPI.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,10 +1,10 @@
-package br.com.FlashMind.controller;
+package br.com.FlashMindAPI.controller;
 
-import br.com.FlashMind.domain.user.User;
-import br.com.FlashMind.domain.user.UserDTO;
-import br.com.FlashMind.domain.user.UserService;
-import br.com.FlashMind.infra.security.TokenDTO;
-import br.com.FlashMind.infra.security.TokenService;
+import br.com.FlashMindAPI.domain.user.User;
+import br.com.FlashMindAPI.domain.user.UserDTO;
+import br.com.FlashMindAPI.domain.user.UserService;
+import br.com.FlashMindAPI.infra.security.TokenDTO;
+import br.com.FlashMindAPI.infra.security.TokenService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

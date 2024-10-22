@@ -1,6 +1,6 @@
-package br.com.FlashMind.infra.utils;
+package br.com.FlashMindAPI.infra.utils;
 
-import br.com.FlashMind.domain.user.User;
+import br.com.FlashMindAPI.domain.user.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class FlashMindUtils {

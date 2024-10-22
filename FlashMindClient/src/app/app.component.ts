@@ -37,4 +37,8 @@ export class AppComponent {
     }
   ];
 
+  get showMenu() {
+    return !this.router.url.includes('/login');
+  }
+
 }

@@ -1,5 +1,7 @@
+<!-- seu-componente.component.html -->
 <div class="po-wrapper">
   <po-menu
+    *ngIf="showMenu"
     [p-menus]="menus"
   ></po-menu>
   <router-outlet></router-outlet>

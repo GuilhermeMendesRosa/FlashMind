@@ -1,4 +1,4 @@
-package br.com.FlashMind.infra.security;
+package br.com.FlashMindAPI.infra.security;
 
 import lombok.Data;
 

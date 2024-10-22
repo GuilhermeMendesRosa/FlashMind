@@ -1,6 +1,6 @@
-package br.com.FlashMind.infra.security;
+package br.com.FlashMindAPI.infra.security;
 
-import br.com.FlashMind.domain.user.UserRepository;
+import br.com.FlashMindAPI.domain.user.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

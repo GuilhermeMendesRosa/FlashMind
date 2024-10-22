@@ -1,6 +1,6 @@
-package br.com.FlashMind.infra.security;
+package br.com.FlashMindAPI.infra.security;
 
-import br.com.FlashMind.domain.user.User;
+import br.com.FlashMindAPI.domain.user.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Value;
