@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
   styleUrl: './documents.component.css'
 })
 export class DocumentsComponent {
-  height: number = 150;
+  height: number = 120;
 
   constructor(private router: Router) {
   }

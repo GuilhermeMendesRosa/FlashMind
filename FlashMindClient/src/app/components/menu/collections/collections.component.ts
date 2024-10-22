@@ -15,8 +15,8 @@ import {PoInfoModule, PoListViewAction, PoListViewModule, PoPageModule, PoButton
 })
 export class CollectionsComponent {
   items: Array<any> = [
-    {name: 'Coleção 1', url: '/page'},
-    {name: 'Registro 2', url: '/page'}
+    {name: 'Coleção 1', url: '/cards'},
+    {name: 'Registro 2', url: '/cards'}
   ];
 
   readonly actions: Array<PoListViewAction> = [
