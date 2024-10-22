@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {PoContainerModule, PoPageModule, PoWidgetModule, PoButtonModule} from "@po-ui/ng-components";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-documents',
@@ -14,5 +15,13 @@ import {PoContainerModule, PoPageModule, PoWidgetModule, PoButtonModule} from "@
   styleUrl: './documents.component.css'
 })
 export class DocumentsComponent {
+  height: number = 150;
+
+  constructor(private router: Router) {
+  }
+
+  public openDocument(): void {
+    this.router.navigate(["/page"]);
+  }
 
 }
