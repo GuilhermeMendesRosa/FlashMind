@@ -28,7 +28,7 @@ export class LoginComponent {
 
   loginSubmit(formData: PoPageLogin) {
     const user: User = {
-      login: formData.login,
+      email: formData.login,
       password: formData.password
     };
     this.authService.login(user).subscribe(token => {

@@ -9,11 +9,14 @@
 		{
 			"name": "Login",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"login\":\"gui@edu.udesc\",\r\n    \"password\":\"senha\"\r\n}",
+					"raw": "{\r\n    \"email\":\"gui@edu.udesc\",\r\n    \"password\":\"senha\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -45,7 +48,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"login\":\"gui@edu.udesc\",\r\n    \"password\":\"senha\"\r\n}",
+					"raw": "{\r\n    \"fullName\":\"guilherme rosa\",\r\n    \"email\":\"gui@edu.udesc\",\r\n    \"password\":\"senha\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -53,7 +56,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/auth/create-user",
+					"raw": "http://localhost:8080/auth/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -61,7 +64,46 @@
 					"port": "8080",
 					"path": [
 						"auth",
-						"create-user"
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJndWlAZWR1LnVkZXNjIiwiaWF0IjoxNzI5NzMyNzA2LCJleHAiOjE3Mjk4MTkxMDZ9.CbyZHrdxrjC3PQJ11TgF4EKrDF9GaiK_G6P5usS_V4I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Documento 1\",\r\n    \"content\":\"What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/documents/create-document",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"documents",
+						"create-document"
 					]
 				}
 			},
