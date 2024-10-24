@@ -1,4 +1,4 @@
-package br.com.FlashMindAPI.domain.document;
+package br.com.roselabs.flashmind.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

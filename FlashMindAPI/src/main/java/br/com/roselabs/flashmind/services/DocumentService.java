@@ -1,6 +1,8 @@
-package br.com.FlashMindAPI.domain.document;
+package br.com.roselabs.flashmind.services;
 
-import br.com.FlashMindAPI.domain.user.UserRepository;
+import br.com.roselabs.flashmind.dtos.DocumentDTO;
+import br.com.roselabs.flashmind.entities.Document;
+import br.com.roselabs.flashmind.repositories.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

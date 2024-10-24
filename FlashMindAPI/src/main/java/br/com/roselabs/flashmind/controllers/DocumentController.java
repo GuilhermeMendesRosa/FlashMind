@@ -1,16 +1,17 @@
-package br.com.FlashMindAPI.controller;
+package br.com.roselabs.flashmind.controllers;
 
-import br.com.FlashMindAPI.domain.document.DocumentDTO;
-import br.com.FlashMindAPI.domain.document.DocumentService;
-import br.com.FlashMindAPI.domain.user.UserService;
+import br.com.roselabs.flashmind.dtos.DocumentDTO;
+import br.com.roselabs.flashmind.services.DocumentService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("documents")
+@RequestMapping("/documents")
+@RestController
 public class DocumentController {
     @Autowired
     private DocumentService documentService;

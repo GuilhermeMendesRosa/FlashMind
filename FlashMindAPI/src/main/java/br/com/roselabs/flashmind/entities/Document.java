@@ -1,17 +1,18 @@
-package br.com.FlashMindAPI.domain.document;
+package br.com.roselabs.flashmind.entities;
 
+import br.com.roselabs.flashmind.dtos.DocumentDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Table(name = "documents")
-@Entity(name = "Document")
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Document {
 
     @Id
@@ -21,6 +22,7 @@ public class Document {
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     public Document(DocumentDTO documentDTO) {

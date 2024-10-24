@@ -1,51 +1,56 @@
-package br.com.FlashMindAPI.domain.user;
+
+package br.com.roselabs.flashmind.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
-@Table(name = "users")
-@Entity(name = "User")
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
 @Data
+@Table(name = "users")
+@Entity
 public class User implements UserDetails {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(insertable = false, updatable = false)
-    private Long id;
-    private String login;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
+    private Integer id;
+
+    @Column(nullable = false)
+    private String fullName;
+
+    @Column(unique = true, length = 100, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
     private String password;
 
-    public User(UserDTO userDTO) {
-        this.login = userDTO.getLogin();
-        this.password = new BCryptPasswordEncoder().encode(userDTO.getPassword());
-    }
+    @CreationTimestamp
+    @Column(updatable = false, name = "created_at")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(("ROLE_USER")));
+        return List.of();
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
 
     @Override
     public String getUsername() {
-        return login;
+        return email;
     }
 
     @Override
@@ -67,4 +72,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
+
