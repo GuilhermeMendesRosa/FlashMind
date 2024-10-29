@@ -25,6 +25,10 @@ public class Document {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Document(DocumentDTO documentDTO) {
         this.title = documentDTO.getTitle();
         this.content = documentDTO.getContent();
