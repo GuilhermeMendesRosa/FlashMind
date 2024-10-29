@@ -2,10 +2,7 @@ package br.com.roselabs.flashmind.entities;
 
 import br.com.roselabs.flashmind.dtos.DocumentDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "documents")
@@ -13,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Document {
 
     @Id
