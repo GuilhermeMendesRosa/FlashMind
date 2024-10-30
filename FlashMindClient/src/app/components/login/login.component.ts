@@ -31,8 +31,8 @@ export class LoginComponent {
       email: formData.login,
       password: formData.password
     };
-    this.authService.login(user).subscribe(token => {
-      localStorage.setItem("jwt", token.jwt)
+    this.authService.login(user).subscribe(authentication => {
+      localStorage.setItem("token", authentication.token)
     })
   }
 }
