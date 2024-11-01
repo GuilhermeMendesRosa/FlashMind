@@ -10,6 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "flash_cards")
 @ToString
 public class FlashCard {
 
