@@ -12,7 +12,13 @@
   </div>
   <po-container class="po-p-3">
     <div>
-      <ckeditor [editor]="Editor" [config]="config" [data]="document.content" style="height: 500px;"></ckeditor>
+      <ckeditor
+        [editor]="Editor"
+        [config]="config"
+        [(ngModel)]="document.content"
+        (change)="onContentChange($event)"
+        style="height: 500px;">
+      </ckeditor>
     </div>
   </po-container>
 </po-page-default>

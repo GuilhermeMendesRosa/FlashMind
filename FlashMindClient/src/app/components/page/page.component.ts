@@ -21,6 +21,7 @@ import {PoButtonModule, PoContainerModule, PoLoadingModule, PoMenuModule, PoPage
 import {ActivatedRoute} from "@angular/router";
 import {DocumentService} from "../../services/document.service";
 import {Document} from "../../models/Document";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,8 @@ import {Document} from "../../models/Document";
     PoContainerModule,
     PoButtonModule,
     PoPageModule,
-    PoLoadingModule
+    PoLoadingModule,
+    FormsModule
   ],
   templateUrl: './page.component.html',
   styleUrl: './page.component.css'
@@ -108,4 +110,9 @@ export class PageComponent implements OnInit {
       }
     });
   }
+
+  public onContentChange(event: any) {
+    this.document.content = event.editor.getData(); // Captura o conteúdo atualizado
+  }
+
 }
