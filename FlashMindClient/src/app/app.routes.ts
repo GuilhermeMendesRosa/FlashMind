@@ -7,7 +7,7 @@ import { CardsComponent } from "./components/cards/cards.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'page/:id_documento', component: PageComponent },  // Define a rota com parâmetro
+  { path: 'page/:id_documento', component: PageComponent },
   { path: 'collections', component: CollectionsComponent },
   { path: 'documents', component: DocumentsComponent },
   { path: 'cards', component: CardsComponent },

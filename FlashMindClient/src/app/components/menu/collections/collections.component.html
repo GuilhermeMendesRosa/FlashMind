@@ -1,6 +1,7 @@
 <po-page-default p-title="Coleções">
   <div class="po-row botao">
     <po-button
+      (p-click)="modal.open()"
       class="po-md-1"
       p-label="Novo"
     ></po-button>
@@ -16,3 +17,18 @@
     </div>
   </div>
 </po-page-default>
+
+<po-modal #modal p-title="Criar Coleção">
+  <po-input
+    name="input"
+    p-label="Título"
+    [(ngModel)]="newCollectionTitle"
+  ></po-input>
+  <po-modal-footer [p-disabled-align]="false">
+    <po-button p-kind="primary" p-label="Criar" (p-click)="createCollection()"></po-button>
+  </po-modal-footer>
+</po-modal>
+
+<div>
+  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
+</div>
