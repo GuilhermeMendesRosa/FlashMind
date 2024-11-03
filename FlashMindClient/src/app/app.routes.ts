@@ -7,8 +7,8 @@ import { CardsComponent } from "./components/cards/cards.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'page/:id_documento', component: PageComponent },
+  { path: 'page/:id_document', component: PageComponent },
   { path: 'collections', component: CollectionsComponent },
   { path: 'documents', component: DocumentsComponent },
-  { path: 'cards', component: CardsComponent },
+  { path: 'cards/:id_collection', component: CardsComponent },
 ];

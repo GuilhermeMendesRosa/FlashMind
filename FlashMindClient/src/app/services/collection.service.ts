@@ -14,7 +14,7 @@ export class CollectionService {
 
   public create(title: string): Observable<Collection> {
     let collection = {title: title};
-    return this.http.post<Collection>(`${this.API_URL}/collections/create`, collection);
+    return this.http.post<Collection>(`${this.API_URL}/collections`, collection);
   }
 
   public update(collection: Collection): Observable<Collection> {

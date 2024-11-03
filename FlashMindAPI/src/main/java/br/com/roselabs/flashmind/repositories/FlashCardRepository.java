@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface FlashCardRepository extends JpaRepository<FlashCard, Long> {
     List<FlashCard> findAllByCollection(Collection collection);
+
+    void deleteAllByCollection(Collection collection);
 }

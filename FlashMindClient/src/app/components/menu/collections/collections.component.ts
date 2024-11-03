@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {
   PoButtonModule,
   PoFieldModule,
@@ -10,6 +10,9 @@ import {
   PoPageModule
 } from "@po-ui/ng-components";
 import {FormsModule} from "@angular/forms";
+import {Router} from "@angular/router";
+import {CollectionService} from "../../../services/collection.service";
+import {Collection} from "../../../models/Collection";
 
 @Component({
   selector: 'app-collections',
@@ -27,7 +30,7 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './collections.component.html',
   styleUrl: './collections.component.css'
 })
-export class CollectionsComponent {
+export class CollectionsComponent implements OnInit {
   public items: Array<any> = [
     {name: 'Coleção 1', url: '/cards'},
     {name: 'Registro 2', url: '/cards'}
@@ -49,13 +52,75 @@ export class CollectionsComponent {
   public newCollectionTitle: string = "";
   public loading: boolean = false;
 
+  constructor(
+    private router: Router,
+    private collectionService: CollectionService
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.refresh();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.refresh();
+  }
+
+  private refresh() {
+    this.loading = true;
+    this.collectionService.findAll().subscribe({
+      next: (collections) => {
+        this.items = collections.map(collection => ({
+          name: collection.title,
+          url: `cards/${collection.id}`,
+          id: collection.id
+        }));
+        this.loading = false;
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erro ao carregar documentos:', err);
+      }
+    });
+  }
+
+
   private edit(selected: number) {
   }
 
-  private delete(selected: number) {
+  private delete(collection: any) {
+    console.log(collection)
+    this.loading = true;
+    this.collectionService.delete(collection.id).subscribe({
+      next: () => {
+        this.refresh();
+        this.loading = false;
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erro ao carregar coleções:', err);
+      }
+    });
   }
 
   public createCollection() {
+    this.loading = true;
+    this.collectionService.create(this.newCollectionTitle).subscribe({
+      next: (collection) => {
+        this.loading = false;
+        this.newCollectionTitle = "";
+        this.refresh();
+        this.openCollection(collection.id);
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erro ao criar coleção:', err);
+      }
+    });
 
+  }
+
+  private openCollection(id: number) {
+    this.router.navigate([`/cards/${id}`]);
   }
 }

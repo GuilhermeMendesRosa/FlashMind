@@ -67,6 +67,7 @@ public class CollectionService {
 
     public void deleteCollection(Long id) {
         Collection collection = findCollectionByIdAndUser(id);
+        flashCardRepository.deleteAllByCollection(collection);
         collectionRepository.delete(collection);
     }
 
