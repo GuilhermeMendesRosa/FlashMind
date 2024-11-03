@@ -12,8 +12,13 @@ export class DocumentService {
   constructor(private http: HttpClient) {
   }
 
-  public create(document: Document): Observable<Document> {
+  public create(title: string): Observable<Document> {
+    let document = {title: title};
     return this.http.post<Document>(`${this.API_URL}/documents/create`, document);
+  }
+
+  public delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/documents/${id}`);
   }
 
   public findAll(): Observable<Document[]> {

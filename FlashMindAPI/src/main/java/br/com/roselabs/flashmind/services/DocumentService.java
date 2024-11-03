@@ -1,6 +1,7 @@
 package br.com.roselabs.flashmind.services;
 
 import br.com.roselabs.flashmind.dtos.DocumentDTO;
+import br.com.roselabs.flashmind.dtos.FindAllDocumentDTO;
 import br.com.roselabs.flashmind.entities.Document;
 import br.com.roselabs.flashmind.repositories.DocumentRepository;
 import br.com.roselabs.flashmind.utils.FlashMindUtils;
@@ -25,9 +26,9 @@ public class DocumentService {
         return toDTO(savedDocument);
     }
 
-    public List<DocumentDTO> findAll() {
+    public List<FindAllDocumentDTO> findAll() {
         return StreamSupport.stream(repository.findAll().spliterator(), false)
-                .map(this::toDTO)
+                .map(FindAllDocumentDTO::new)
                 .collect(Collectors.toList());
     }
 

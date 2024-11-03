@@ -1,6 +1,7 @@
 package br.com.roselabs.flashmind.controllers;
 
 import br.com.roselabs.flashmind.dtos.DocumentDTO;
+import br.com.roselabs.flashmind.dtos.FindAllDocumentDTO;
 import br.com.roselabs.flashmind.services.DocumentService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class DocumentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DocumentDTO>> findAll() {
-        List<DocumentDTO> documents = this.documentService.findAll();
+    public ResponseEntity<List<FindAllDocumentDTO>> findAll() {
+        List<FindAllDocumentDTO> documents = this.documentService.findAll();
         return ResponseEntity.ok(documents);
     }
 

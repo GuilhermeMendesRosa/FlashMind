@@ -1,6 +1,7 @@
 <po-page-default p-title="Documentos" class="po-lg-12">
   <div class="po-row botao">
     <po-button
+      (p-click)="modal.open()"
       class="po-md-1"
       p-label="Novo"
     ></po-button>
@@ -12,6 +13,23 @@
     [p-title]="document.title"
     (p-click)="openDocument(document.id)"
     [p-height]="height"
-    p-primary-label="Excluir">
+    p-primary-label="Excluir"
+    (p-primary-action)="deleteDocument(document.id)"
+  >
   </po-widget>
 </po-page-default>
+
+<div>
+  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
+</div>
+
+<po-modal #modal p-title="Criar Documento">
+  <po-input
+    name="input"
+    p-label="Título"
+    [(ngModel)]="newDocumentTitle"
+  ></po-input>
+  <po-modal-footer [p-disabled-align]="false">
+    <po-button p-kind="primary" p-label="Confirm" (p-click)="createDocument()"></po-button>
+  </po-modal-footer>
+</po-modal>
