@@ -1,55 +1,16 @@
-  <po-page-default p-title="Documentos" class="po-lg-12">
+<po-page-default p-title="Documentos" class="po-lg-12">
   <div class="po-row botao">
     <po-button
       class="po-md-1"
       p-label="Novo"
     ></po-button>
   </div>
-  <po-widget
-    class="po-lg-2 po-mb-1 "
-    p-title="Documento 1"
-    (p-click)="openDocument()"
-    [p-height]="height"
-    p-primary-label="Excluir"
-  >
-  </po-widget>
 
   <po-widget
+    *ngFor="let document of documents"
     class="po-lg-2 po-mb-1"
-    p-title="Documento 2"
-    (p-click)="openDocument()"
-    [p-height]="height"
-    p-primary-label="Excluir">
-  </po-widget>
-
-  <po-widget
-    class="po-lg-2 po-mb-1"
-    p-title="Documento 3"
-    (p-click)="openDocument()"
-    [p-height]="height"
-    p-primary-label="Excluir">
-  </po-widget>
-
-  <po-widget
-    class="po-lg-2 po-mb-1"
-    p-title="Documento 4"
-    (p-click)="openDocument()"
-    [p-height]="height"
-    p-primary-label="Excluir">
-  </po-widget>
-
-  <po-widget
-    class="po-lg-2 po-mb-1"
-    p-title="Documento 5"
-    (p-click)="openDocument()"
-    [p-height]="height"
-    p-primary-label="Excluir">
-  </po-widget>
-
-  <po-widget
-    class="po-lg-2 po-mb-1"
-    p-title="Documento 6"
-    (p-click)="openDocument()"
+    [p-title]="document.title"
+    (p-click)="openDocument(document.id)"
     [p-height]="height"
     p-primary-label="Excluir">
   </po-widget>

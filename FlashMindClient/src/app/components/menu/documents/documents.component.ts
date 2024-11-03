@@ -3,6 +3,7 @@ import {PoContainerModule, PoPageModule, PoWidgetModule, PoButtonModule} from "@
 import {Router} from "@angular/router";
 import {DocumentService} from "../../../services/document.service";
 import {Document} from "../../../models/Document";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-documents',
@@ -11,7 +12,8 @@ import {Document} from "../../../models/Document";
     PoPageModule,
     PoWidgetModule,
     PoContainerModule,
-    PoButtonModule
+    PoButtonModule,
+    NgForOf
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.css'
@@ -35,7 +37,7 @@ export class DocumentsComponent implements OnInit {
     });
   }
 
-  public openDocument(): void {
+  public openDocument(id: number): void {
     this.router.navigate(["/page"]);
   }
 
