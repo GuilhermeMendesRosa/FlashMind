@@ -19,10 +19,6 @@
   </po-widget>
 </po-page-default>
 
-<div>
-  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
-</div>
-
 <po-modal #modal p-title="Criar Documento">
   <po-input
     name="input"
@@ -33,3 +29,7 @@
     <po-button p-kind="primary" p-label="Confirm" (p-click)="createDocument()"></po-button>
   </po-modal-footer>
 </po-modal>
+
+<div>
+  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
+</div>

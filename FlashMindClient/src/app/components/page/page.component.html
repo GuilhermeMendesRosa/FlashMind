@@ -1,17 +1,22 @@
-<po-page-default p-title="Documento">
-    <div class="po-row">
-      <po-button
-        class="po-md-1"
-        p-label="Salvar"
-      ></po-button>
-      <po-button
-        class="po-md-1"
-        p-label="Gerar"
-      ></po-button>
+<po-page-default [p-title]="document.title">
+  <div class="po-row">
+    <po-button
+      class="po-md-1"
+      p-label="Salvar"
+      (p-click)="updateDocument()"
+    ></po-button>
+    <po-button
+      class="po-md-1"
+      p-label="Gerar"
+    ></po-button>
+  </div>
+  <po-container class="po-p-3">
+    <div>
+      <ckeditor [editor]="Editor" [config]="config" [data]="document.content" style="height: 500px;"></ckeditor>
     </div>
-    <po-container class="po-p-3">
-      <div>
-        <ckeditor [editor]="Editor" [config]="config" data="" style="height: 500px;"></ckeditor>
-      </div>
-    </po-container>
+  </po-container>
 </po-page-default>
+
+<div>
+  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
+</div>

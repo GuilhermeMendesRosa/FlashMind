@@ -17,6 +17,10 @@ export class DocumentService {
     return this.http.post<Document>(`${this.API_URL}/documents/create`, document);
   }
 
+  public update(document: Document): Observable<Document> {
+    return this.http.put<Document>(`${this.API_URL}/documents/${document.id}`, document);
+  }
+
   public delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/documents/${id}`);
   }
@@ -24,4 +28,9 @@ export class DocumentService {
   public findAll(): Observable<Document[]> {
     return this.http.get<Document[]>(`${this.API_URL}/documents`);
   }
+
+  public findById(id: number): Observable<Document> {
+    return this.http.get<Document>(`${this.API_URL}/documents/${id}`);
+  }
+
 }

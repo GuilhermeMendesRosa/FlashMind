@@ -1,23 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {
-  ClassicEditor,
   Bold,
+  ClassicEditor,
   Essentials,
+  Font,
   Heading,
   Indent,
   IndentBlock,
   Italic,
   Link,
   List,
-  MediaEmbed,
   Paragraph,
   Table,
-  Undo, Font
+  Undo
 } from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
-import {PoButtonModule, PoContainerModule, PoMenuModule, PoPageModule} from "@po-ui/ng-components";
+import {PoButtonModule, PoContainerModule, PoLoadingModule, PoMenuModule, PoPageModule} from "@po-ui/ng-components";
+import {ActivatedRoute} from "@angular/router";
+import {DocumentService} from "../../services/document.service";
+import {Document} from "../../models/Document";
 
 @Component({
   selector: 'app-home',
@@ -27,12 +30,13 @@ import {PoButtonModule, PoContainerModule, PoMenuModule, PoPageModule} from "@po
     PoMenuModule,
     PoContainerModule,
     PoButtonModule,
-    PoPageModule
+    PoPageModule,
+    PoLoadingModule
   ],
   templateUrl: './page.component.html',
   styleUrl: './page.component.css'
 })
-export class PageComponent {
+export class PageComponent implements OnInit {
   public Editor = ClassicEditor;
   public config = {
     toolbar: [
@@ -57,5 +61,51 @@ export class PageComponent {
       Font
     ]
   }
+  public loading: boolean = false;
+  public document: Document = {
+    title: "",
+    content: "",
+    id: 0
+  };
 
+  constructor(
+    private route: ActivatedRoute,
+    private documentService: DocumentService
+  ) {
+  }
+
+  ngOnInit(): void {
+    const documentId = Number(this.route.snapshot.paramMap.get('id_documento'));
+
+    if (documentId) {
+      this.loadDocument(documentId);
+    }
+  }
+
+  private loadDocument(id: number): void {
+    this.loading = true;
+    this.documentService.findById(id).subscribe({
+      next: (document) => {
+        this.loading = false;
+        this.document = document;
+      },
+      error: (error) => {
+        this.loading = false;
+        console.error('Erro ao carregar o documento:', error);
+      }
+    });
+  }
+
+  public updateDocument() {
+    this.loading = true;
+    this.documentService.update(this.document).subscribe({
+      next: (document) => {
+        this.loading = false;
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erro ao criar documento:', err);
+      }
+    });
+  }
 }

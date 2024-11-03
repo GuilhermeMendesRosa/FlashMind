@@ -34,7 +34,7 @@ import {FormsModule} from "@angular/forms";
 export class DocumentsComponent implements OnInit, OnChanges {
   public height: number = 120;
   public documents: Document[] = [];
-  public loading: boolean = false;
+    public loading: boolean = false;
   public newDocumentTitle: string = "";
 
   constructor(
@@ -66,7 +66,7 @@ export class DocumentsComponent implements OnInit, OnChanges {
   }
 
   public openDocument(id: number): void {
-    this.router.navigate(["/page"]);
+    this.router.navigate([`/page/${id}`]);
   }
 
   public deleteDocument(id: number) {
