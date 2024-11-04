@@ -3,15 +3,15 @@ package br.com.roselabs.flashmind.services;
 import br.com.roselabs.flashmind.dtos.DocumentDTO;
 import br.com.roselabs.flashmind.dtos.FindAllDocumentDTO;
 import br.com.roselabs.flashmind.entities.Document;
+import br.com.roselabs.flashmind.entities.User;
 import br.com.roselabs.flashmind.repositories.DocumentRepository;
 import br.com.roselabs.flashmind.utils.FlashMindUtils;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class DocumentService {
@@ -27,13 +27,15 @@ public class DocumentService {
     }
 
     public List<FindAllDocumentDTO> findAll() {
-        return StreamSupport.stream(repository.findAll().spliterator(), false)
+        User loggedUser = FlashMindUtils.getLoggedUser();
+        return repository.findAllByUser(loggedUser).stream()
                 .map(FindAllDocumentDTO::new)
                 .collect(Collectors.toList());
     }
 
     public DocumentDTO findById(Long id) {
-        Document document = repository.findById(id)
+        User loggedUser = FlashMindUtils.getLoggedUser();
+        Document document = repository.findByIdAndUser(id, loggedUser)
                 .orElseThrow(() -> new EntityNotFoundException("Document not found with id: " + id));
         return toDTO(document);
     }
