@@ -58,10 +58,12 @@ export class CardsComponent implements OnInit {
   }
 
   public rightAnswer() {
-    this.collection.flashCards.pop()
+    this.collection.flashCards.pop();
+    this.answered = false;
   }
 
   public wrongAnswer() {
     this.collection.flashCards = this.collection.flashCards.sort(() => Math.random() - 0.5);
+    this.answered = false;
   }
 }
