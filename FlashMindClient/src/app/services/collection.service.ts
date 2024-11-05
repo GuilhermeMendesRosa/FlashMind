@@ -32,4 +32,6 @@ export class CollectionService {
   public findById(id: number): Observable<Collection> {
     return this.http.get<Collection>(`${this.API_URL}/collections/${id}`);
   }
+
+
 }

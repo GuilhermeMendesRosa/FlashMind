@@ -10,5 +10,5 @@ export const routes: Routes = [
   { path: 'page/:id_document', component: PageComponent },
   { path: 'collections', component: CollectionsComponent },
   { path: 'documents', component: DocumentsComponent },
-  { path: 'cards/:id_collection', component: CardsComponent },
+  { path: 'collections/cards/:id_collection', component: CardsComponent },
 ];

@@ -1,33 +1,44 @@
 <po-page-default p-title="Coleção">
-    <div class="content">
-        <div class="card">
-            <po-container class="po-p-3 card">
-                <po-widget class="po-lg-12 po-mb-1 ">
-                    <div class="po-font-subtitle po-text-center">Pegunta X</div>
-                </po-widget>
+  <div class="content">
+    <!--    <po-button-->
+    <!--      class="po-m-1"-->
+    <!--      p-label="Criar Flash Card"-->
+    <!--    ></po-button>-->
+    <div class="card">
+      <po-container class="po-p-3 card">
+        <div>
+          <po-widget class="po-lg-12 po-mb-1 ">
+            <div class="po-font-subtitle po-text-center"> {{ collection.flashCards.at(-1)?.front }}</div>
+          </po-widget>
 
-                <div class="button">
-                    <po-button
-                            class="po-m-1"
-                            p-label="Mostrar Resposta"
-                    ></po-button>
-                </div>
-
-                <po-widget class="po-lg-12 po-mb-1 ">
-                    <div class="po-font-subtitle po-text-center">Resposta X</div>
-                </po-widget>
-
-                <div class="button">
-                    <po-button
-                            class="po-m-1"
-                            p-label="Acertei"
-                    ></po-button>
-                    <po-button
-                            class="po-m-1"
-                            p-label="Errei"
-                    ></po-button>
-                </div>
-            </po-container>
+          <div class="button" *ngIf="!answered">
+            <po-button
+              class="po-m-1"
+              p-label="Mostrar Resposta"
+              (p-click)="showResponse()"
+            ></po-button>
+          </div>
         </div>
+
+        <div *ngIf="answered">
+          <po-widget class="po-lg-12 po-mb-1 ">
+            <div class="po-font-subtitle po-text-center">{{ collection.flashCards.at(-1)?.back }}</div>
+          </po-widget>
+
+          <div class="button">
+            <po-button
+              class="po-m-1"
+              p-label="Acertei"
+              (p-click)="rightAnswer()"
+            ></po-button>
+            <po-button
+              class="po-m-1"
+              p-label="Errei"
+              (p-click)="wrongAnswer()"
+            ></po-button>
+          </div>
+        </div>
+      </po-container>
     </div>
+  </div>
 </po-page-default>

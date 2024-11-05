@@ -31,16 +31,18 @@ import {Collection} from "../../../models/Collection";
   styleUrl: './collections.component.css'
 })
 export class CollectionsComponent implements OnInit {
-  public items: Array<any> = [
-    {name: 'Coleção 1', url: '/cards'},
-    {name: 'Registro 2', url: '/cards'}
-  ];
+  public items: Array<any> = [];
 
   public readonly actions: Array<PoListViewAction> = [
     {
       label: '',
       action: this.edit.bind(this),
       icon: 'ph ph-note-pencil'
+    },
+    {
+      label: '',
+      action: this.create.bind(this),
+      icon: 'ph ph-plus'
     },
     {
       label: '',
@@ -84,8 +86,10 @@ export class CollectionsComponent implements OnInit {
     });
   }
 
+  private edit(collection: any) {
+  }
 
-  private edit(selected: number) {
+  private create(collection: any) {
   }
 
   private delete(collection: any) {
