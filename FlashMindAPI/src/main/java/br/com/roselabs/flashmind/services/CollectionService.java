@@ -13,6 +13,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,9 +84,14 @@ public class CollectionService {
         CollectionDTO dto = new CollectionDTO();
         dto.setId(collection.getId());
         dto.setTitle(collection.getTitle());
-        dto.setFlashCards(collection.getFlashCards().stream().map(this::toDTO).collect(Collectors.toList()));
+
+        List<FlashCard> shuffledFlashCards = new ArrayList<>(collection.getFlashCards());
+        Collections.shuffle(shuffledFlashCards);
+        dto.setFlashCards(shuffledFlashCards.stream().map(this::toDTO).collect(Collectors.toList()));
+
         return dto;
     }
+
 
     private FlashCardDTO toDTO(FlashCard flashCard) {
         FlashCardDTO dto = new FlashCardDTO();

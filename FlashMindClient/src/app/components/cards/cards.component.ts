@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
-import {PoButtonModule, PoContainerModule, PoPageModule, PoWidgetModule} from "@po-ui/ng-components";
+import {PoButtonModule, PoContainerModule, PoInfoModule, PoPageModule, PoWidgetModule} from "@po-ui/ng-components";
 import {NgIf} from "@angular/common";
 import {CollectionService} from "../../services/collection.service";
 import {Collection} from "../../models/Collection";
 import {ActivatedRoute} from "@angular/router";
+import {FlashCard} from "../../models/FlashCard";
 
 @Component({
   selector: 'app-cards',
@@ -15,7 +16,8 @@ import {ActivatedRoute} from "@angular/router";
     PoContainerModule,
     PoPageModule,
     PoWidgetModule,
-    NgIf
+    NgIf,
+    PoInfoModule
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css'
@@ -63,7 +65,7 @@ export class CardsComponent implements OnInit {
   }
 
   public wrongAnswer() {
-    this.collection.flashCards = this.collection.flashCards.sort(() => Math.random() - 0.5);
+    this.collection.flashCards.push(<FlashCard>this.collection.flashCards.shift());
     this.answered = false;
   }
 }
