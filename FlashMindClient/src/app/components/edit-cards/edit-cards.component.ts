@@ -1,6 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PoButtonModule, PoContainerModule, PoFieldModule, PoPageModule, PoWidgetModule} from "@po-ui/ng-components";
 import {FormsModule} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CollectionService} from "../../services/collection.service";
+import {Collection} from "../../models/Collection";
 
 @Component({
   selector: 'app-edit-cards',
@@ -16,8 +19,60 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './edit-cards.component.html',
   styleUrl: './edit-cards.component.css'
 })
-export class EditCardsComponent {
-  public answer!: string;
-  public response!: string;
+export class EditCardsComponent implements OnInit {
+
+  private collectionId: number = 0;
+  public currentCard: number = 0;
+  public loading: boolean = false;
+  public collection: Collection = {id: 0, title: "", flashCards: []};
+
+  public constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private collectionsService: CollectionService) {
+  }
+
+
+  ngOnInit(): void {
+    this.collectionId = Number(this.route.snapshot.paramMap.get('id_collection'));
+
+    this.collectionsService.findById(this.collectionId).subscribe(collection => {
+      this.collection = collection;
+    })
+  }
+
+  public createCard() {
+    this.collection.flashCards.push({front: "", back: "", id: 0});
+    this.currentCard++;
+  }
+
+  public deleteCard() {
+    if (this.currentCard >= 0 && this.currentCard < this.collection.flashCards.length) {
+      this.collection.flashCards.splice(this.currentCard, 1);
+      this.currentCard = Math.max(0, this.currentCard - 1);
+    }
+  }
+
+  public left() {
+    if (this.collection.flashCards.length > 1) this.currentCard--;
+  }
+
+  public right() {
+    if (this.collection.flashCards.length > this.currentCard + 1) this.currentCard++;
+  }
+
+  public save() {
+    this.loading = true;
+    this.collectionsService.update(this.collection).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/collections']);
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erro ao salvar coleção:', err);
+      }
+    });
+  }
 
 }

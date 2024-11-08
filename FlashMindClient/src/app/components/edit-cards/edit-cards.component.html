@@ -1,27 +1,32 @@
-<po-page-default p-title="Coleção">
+<po-page-default p-title="{{collection.title}}">
   <div class="po-row botao">
-    <po-button class="po-md-1" p-label="Salvar"></po-button>
+    <po-button class="po-md-1" p-label="Salvar" (p-click)="save()"></po-button>
   </div>
   <div class="content">
     <div class="card">
       <po-container class="po-p-3 card">
+
+        <div class="botoes">
+          <po-button class="po-m-1" p-icon="ph ph-plus" (p-click)="createCard()"></po-button>
+          <po-button class="po-m-1" p-icon="ph ph-trash" (p-click)="deleteCard()"></po-button>
+        </div>
         <po-textarea
           class="po-lg-12 po-mb-1"
           p-label="Pergunta"
-          [(ngModel)]="answer"
+          [(ngModel)]="collection.flashCards.at(currentCard)!.front"
           p-placeholder="Digite a pergunta"
         ></po-textarea>
 
         <po-textarea
           class="po-lg-12 po-mb-1"
           p-label="Resposta"
-          [(ngModel)]="response"
+          [(ngModel)]="collection.flashCards.at(currentCard)!.back"
           p-placeholder="Digite a resposta"
         ></po-textarea>
 
         <div class="button">
-          <po-button class="po-m-1" p-icon="ph ph-arrow-left"></po-button>
-          <po-button class="po-m-1" p-icon="ph ph-arrow-right"></po-button>
+          <po-button class="po-m-1" p-icon="ph ph-arrow-left" (p-click)="left()"></po-button>
+          <po-button class="po-m-1" p-icon="ph ph-arrow-right" (p-click)="right()"></po-button>
         </div>
 
       </po-container>
