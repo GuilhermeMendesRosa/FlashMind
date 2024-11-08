@@ -87,9 +87,11 @@ export class CollectionsComponent implements OnInit {
   }
 
   private edit(collection: any) {
+    this.router.navigate([`/collections/edit-cards/${collection.id}`]);
   }
 
   private create(collection: any) {
+    this.router.navigate([`/collections/create-cards/${collection.id}`]);
   }
 
   private delete(collection: any) {

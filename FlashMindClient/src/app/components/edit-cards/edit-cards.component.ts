@@ -3,7 +3,7 @@ import {PoButtonModule, PoContainerModule, PoFieldModule, PoPageModule, PoWidget
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-create-cards',
+  selector: 'app-edit-cards',
   standalone: true,
   imports: [
     PoButtonModule,
@@ -13,10 +13,10 @@ import {FormsModule} from "@angular/forms";
     PoFieldModule,
     FormsModule
   ],
-  templateUrl: './create-cards.component.html',
-  styleUrl: './create-cards.component.css'
+  templateUrl: './edit-cards.component.html',
+  styleUrl: './edit-cards.component.css'
 })
-export class CreateCardsComponent {
+export class EditCardsComponent {
   public answer!: string;
   public response!: string;
 

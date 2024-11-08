@@ -27,7 +27,7 @@ import {
   PoModalModule,
   PoPageModule
 } from "@po-ui/ng-components";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DocumentService} from "../../services/document.service";
 import {Document} from "../../models/Document";
 import {FormsModule} from "@angular/forms";
@@ -86,6 +86,7 @@ export class PageComponent implements OnInit {
   public selectedCollectionId: number = 0;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private documentService: DocumentService,
     private collectionsService: CollectionService
@@ -156,7 +157,8 @@ export class PageComponent implements OnInit {
   }
 
   public createFlashCards(): void {
-
+    if (this.selectedCollectionId == 0) return;
+    this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
   }
 
   protected readonly state = state;
