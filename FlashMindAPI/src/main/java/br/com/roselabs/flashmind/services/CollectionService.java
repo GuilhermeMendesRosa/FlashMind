@@ -58,6 +58,8 @@ public class CollectionService {
         collection.setTitle(createCollectionDTO.getTitle());
 
         List<FlashCard> flashCards = createCollectionDTO.getFlashCards().stream()
+                .filter(dto -> dto.getFront() != null && !dto.getFront().isEmpty() &&
+                        dto.getBack() != null && !dto.getBack().isEmpty())
                 .map(dto -> new FlashCard(dto.getFront(), dto.getBack(), collection))
                 .toList();
 
@@ -72,6 +74,8 @@ public class CollectionService {
         Collection collection = findCollectionByIdAndUser(id);
 
         List<FlashCard> flashCards = flashCardDTOS.stream()
+                .filter(dto -> dto.getFront() != null && !dto.getFront().isEmpty() &&
+                        dto.getBack() != null && !dto.getBack().isEmpty())
                 .map(dto -> new FlashCard(dto.getFront(), dto.getBack(), collection))
                 .toList();
 
@@ -80,6 +84,7 @@ public class CollectionService {
 
         return toDTO(updatedCollection);
     }
+
 
     public void deleteCollection(Long id) {
         Collection collection = findCollectionByIdAndUser(id);

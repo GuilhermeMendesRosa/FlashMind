@@ -11,19 +11,21 @@
           <po-button class="po-m-1" p-icon="ph ph-trash" (p-click)="deleteCard()"></po-button>
         </div>
 
-        <po-textarea
-          class="po-lg-12 po-mb-1"
-          p-label="Pergunta"
-          [(ngModel)]="flashCards.at(currentCard)!.front"
-          p-placeholder="Digite a pergunta"
-        ></po-textarea>
+        <ng-container *ngIf="flashCards.length > 0 && flashCards[currentCard]">
+          <po-textarea
+            class="po-lg-12 po-mb-1"
+            p-label="Pergunta"
+            [(ngModel)]="flashCards[currentCard].front"
+            p-placeholder="Digite a pergunta"
+          ></po-textarea>
 
-        <po-textarea
-          class="po-lg-12 po-mb-1"
-          p-label="Resposta"
-          [(ngModel)]="flashCards.at(currentCard)!.back"
-          p-placeholder="Digite a resposta"
-        ></po-textarea>
+          <po-textarea
+            class="po-lg-12 po-mb-1"
+            p-label="Resposta"
+            [(ngModel)]="flashCards[currentCard].back"
+            p-placeholder="Digite a resposta"
+          ></po-textarea>
+        </ng-container>
 
         <div class="button">
           <po-button class="po-m-1" p-icon="ph ph-arrow-left" (p-click)="left()"></po-button>

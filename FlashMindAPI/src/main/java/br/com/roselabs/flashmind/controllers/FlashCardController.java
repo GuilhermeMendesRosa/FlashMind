@@ -3,6 +3,7 @@ package br.com.roselabs.flashmind.controllers;
 import br.com.roselabs.flashmind.dtos.FlashCardDTO;
 import br.com.roselabs.flashmind.dtos.FlashCardRequestDTO;
 import br.com.roselabs.flashmind.services.FlashCardService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class FlashCardController {
     private final FlashCardService flashCardService;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<FlashCardDTO> createFlashCard(@PathVariable Long collectionId, @RequestBody FlashCardRequestDTO flashCardRequestDTO) {
         return ResponseEntity.ok(flashCardService.createFlashCard(collectionId, flashCardRequestDTO));
     }
@@ -32,11 +34,13 @@ public class FlashCardController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<FlashCardDTO> updateFlashCard(@PathVariable Long id, @RequestBody FlashCardRequestDTO flashCardRequestDTO) {
         return ResponseEntity.ok(flashCardService.updateFlashCard(id, flashCardRequestDTO));
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> deleteFlashCard(@PathVariable Long id) {
         flashCardService.deleteFlashCard(id);
         return ResponseEntity.noContent().build();

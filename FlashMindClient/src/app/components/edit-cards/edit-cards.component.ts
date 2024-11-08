@@ -4,6 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CollectionService} from "../../services/collection.service";
 import {Collection} from "../../models/Collection";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-edit-cards',
@@ -14,7 +15,8 @@ import {Collection} from "../../models/Collection";
     PoPageModule,
     PoWidgetModule,
     PoFieldModule,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './edit-cards.component.html',
   styleUrl: './edit-cards.component.css'
@@ -32,33 +34,36 @@ export class EditCardsComponent implements OnInit {
     private collectionsService: CollectionService) {
   }
 
-
   ngOnInit(): void {
     this.collectionId = Number(this.route.snapshot.paramMap.get('id_collection'));
 
     this.collectionsService.findById(this.collectionId).subscribe(collection => {
       this.collection = collection;
-    })
+    });
   }
 
   public createCard() {
     this.collection.flashCards.push({front: "", back: "", id: 0});
-    this.currentCard++;
+    this.currentCard = this.collection.flashCards.length - 1;
   }
 
   public deleteCard() {
-    if (this.currentCard >= 0 && this.currentCard < this.collection.flashCards.length) {
+    if (this.collection.flashCards.length > 0) {
       this.collection.flashCards.splice(this.currentCard, 1);
-      this.currentCard = Math.max(0, this.currentCard - 1);
+      this.currentCard = Math.min(this.currentCard, this.collection.flashCards.length - 1);
     }
   }
 
   public left() {
-    if (this.collection.flashCards.length > 1) this.currentCard--;
+    if (this.currentCard > 0) {
+      this.currentCard--;
+    }
   }
 
   public right() {
-    if (this.collection.flashCards.length > this.currentCard + 1) this.currentCard++;
+    if (this.currentCard < this.collection.flashCards.length - 1) {
+      this.currentCard++;
+    }
   }
 
   public save() {
@@ -74,5 +79,4 @@ export class EditCardsComponent implements OnInit {
       }
     });
   }
-
 }

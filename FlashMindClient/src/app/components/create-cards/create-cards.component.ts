@@ -11,6 +11,7 @@ import {FormsModule} from "@angular/forms";
 import {FlashCard} from "../../models/FlashCard";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CollectionService} from "../../services/collection.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-create-cards',
@@ -22,7 +23,8 @@ import {CollectionService} from "../../services/collection.service";
     PoWidgetModule,
     PoFieldModule,
     FormsModule,
-    PoLoadingModule
+    PoLoadingModule,
+    NgIf
   ],
   templateUrl: './create-cards.component.html',
   styleUrl: './create-cards.component.css'

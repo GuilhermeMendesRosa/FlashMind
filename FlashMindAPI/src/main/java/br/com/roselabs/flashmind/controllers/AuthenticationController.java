@@ -6,6 +6,7 @@ import br.com.roselabs.flashmind.dtos.RegisterUserDto;
 import br.com.roselabs.flashmind.responses.LoginResponse;
 import br.com.roselabs.flashmind.services.AuthenticationService;
 import br.com.roselabs.flashmind.services.JwtService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
+    @Transactional
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
 
@@ -31,6 +33,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
+    @Transactional
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
 

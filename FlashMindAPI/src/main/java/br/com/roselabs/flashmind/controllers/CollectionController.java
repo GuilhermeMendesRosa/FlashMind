@@ -5,6 +5,7 @@ import br.com.roselabs.flashmind.dtos.CreateCollectionDTO;
 import br.com.roselabs.flashmind.dtos.FlashCardDTO;
 import br.com.roselabs.flashmind.dtos.SimpleCollectionDTO;
 import br.com.roselabs.flashmind.services.CollectionService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class CollectionController {
     private final CollectionService collectionService;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<CollectionDTO> createCollection(@RequestBody CreateCollectionDTO createCollectionDTO) {
         return ResponseEntity.ok(collectionService.createCollection(createCollectionDTO));
     }
@@ -35,16 +37,19 @@ public class CollectionController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<CollectionDTO> updateCollection(@PathVariable Long id, @RequestBody CreateCollectionDTO createCollectionDTO) {
         return ResponseEntity.ok(collectionService.updateCollection(id, createCollectionDTO));
     }
 
     @PatchMapping("/{id}")
+    @Transactional
     public ResponseEntity<CollectionDTO> addFlashCards(@PathVariable Long id, @RequestBody List<FlashCardDTO> flashCardDTOS) {
         return ResponseEntity.ok(collectionService.addFlashCards(id, flashCardDTOS));
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> deleteCollection(@PathVariable Long id) {
         collectionService.deleteCollection(id);
         return ResponseEntity.noContent().build();
