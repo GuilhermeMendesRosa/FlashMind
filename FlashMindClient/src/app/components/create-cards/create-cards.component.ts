@@ -1,7 +1,16 @@
 import {Component} from '@angular/core';
-import {PoButtonModule, PoContainerModule, PoFieldModule, PoPageModule, PoWidgetModule} from "@po-ui/ng-components";
+import {
+  PoButtonModule,
+  PoContainerModule,
+  PoFieldModule,
+  PoLoadingModule,
+  PoPageModule,
+  PoWidgetModule
+} from "@po-ui/ng-components";
 import {FormsModule} from "@angular/forms";
 import {FlashCard} from "../../models/FlashCard";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CollectionService} from "../../services/collection.service";
 
 @Component({
   selector: 'app-create-cards',
@@ -12,20 +21,31 @@ import {FlashCard} from "../../models/FlashCard";
     PoPageModule,
     PoWidgetModule,
     PoFieldModule,
-    FormsModule
+    FormsModule,
+    PoLoadingModule
   ],
   templateUrl: './create-cards.component.html',
   styleUrl: './create-cards.component.css'
 })
 export class CreateCardsComponent {
 
-  public answer!: string;
+  private collectionId: number = 0;
   public currentCard: number = 0;
-
-  public response!: string;
   public flashCards: FlashCard[] = [{
     front: "", back: "", id: 0
   }];
+  public loading: boolean = false;
+
+  public constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private collectionsService: CollectionService) {
+  }
+
+
+  ngOnInit(): void {
+    this.collectionId = Number(this.route.snapshot.paramMap.get('id_collection'));
+  }
 
   public createCard() {
     this.flashCards.push({front: "", back: "", id: 0});
@@ -46,4 +66,19 @@ export class CreateCardsComponent {
   public right() {
     if (this.flashCards.length > this.currentCard + 1) this.currentCard++;
   }
+
+  public addAll() {
+    this.loading = true;
+    this.collectionsService.addFlashCards(this.collectionId, this.flashCards).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/collections']);
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erro ao salvar flashcards:', err);
+      }
+    });
+  }
+
 }

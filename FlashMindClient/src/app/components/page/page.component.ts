@@ -94,7 +94,7 @@ export class PageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const documentId = Number(this.route.snapshot.paramMap.get('id_document'));
+    let documentId = Number(this.route.snapshot.paramMap.get('id_document'));
 
     if (documentId) {
       this.loadDocument(documentId);

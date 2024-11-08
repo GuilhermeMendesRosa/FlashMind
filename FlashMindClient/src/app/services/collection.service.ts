@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Collection} from "../models/Collection";
+import {FlashCard} from "../models/FlashCard";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class CollectionService {
 
   public update(collection: Collection): Observable<Collection> {
     return this.http.put<Collection>(`${this.API_URL}/collections/${collection.id}`, collection);
+  }
+
+  public addFlashCards(id: Number, flashCards: FlashCard[]): Observable<Collection> {
+    return this.http.patch<Collection>(`${this.API_URL}/collections/${id}`, flashCards);
   }
 
   public delete(id: number): Observable<void> {

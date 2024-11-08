@@ -1,14 +1,14 @@
 <po-page-default p-title="Coleção">
   <div class="po-row botao">
-    <po-button class="po-md-1" p-label="Adicionar"></po-button>
+    <po-button class="po-md-1" p-label="Adicionar" (p-click)="addAll()"></po-button>
   </div>
   <div class="content">
     <div class="card">
       <po-container class="po-p-3 card">
 
         <div class="botoes">
-            <po-button class="po-m-1" p-icon="ph ph-plus" (p-click)="createCard()" ></po-button>
-            <po-button class="po-m-1" p-icon="ph ph-trash" (p-click)="deleteCard()"></po-button>
+          <po-button class="po-m-1" p-icon="ph ph-plus" (p-click)="createCard()"></po-button>
+          <po-button class="po-m-1" p-icon="ph ph-trash" (p-click)="deleteCard()"></po-button>
         </div>
 
         <po-textarea
@@ -34,3 +34,7 @@
     </div>
   </div>
 </po-page-default>
+
+<div>
+  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
+</div>
