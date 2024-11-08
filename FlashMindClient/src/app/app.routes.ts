@@ -6,6 +6,7 @@ import { DocumentsComponent } from "./components/menu/documents/documents.compon
 import { CardsComponent } from "./components/cards/cards.component";
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'documents', pathMatch: 'full' }, // Redirecionamento da rota vazia para 'documents'
   { path: 'login', component: LoginComponent },
   { path: 'page/:id_document', component: PageComponent },
   { path: 'collections', component: CollectionsComponent },

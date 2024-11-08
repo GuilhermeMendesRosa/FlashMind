@@ -8,7 +8,9 @@
     <po-button
       class="po-md-1"
       p-label="Gerar"
+      (p-click)="openModal()"
     ></po-button>
+
   </div>
   <po-container class="po-p-3">
     <div>
@@ -22,6 +24,20 @@
     </div>
   </po-container>
 </po-page-default>
+
+
+<po-modal #modal p-title="Gerar Flash Cards">
+  <po-select
+    name="select"
+    p-label="Coleção"
+    [p-options]="options"
+    (p-change)="onChange($event)"
+  >
+  </po-select>
+  <po-modal-footer [p-disabled-align]="false">
+    <po-button p-kind="primary" p-label="Gerar" (p-click)="createFlashCards()"></po-button>
+  </po-modal-footer>
+</po-modal>
 
 <div>
   <po-loading-overlay [hidden]="!loading"></po-loading-overlay>

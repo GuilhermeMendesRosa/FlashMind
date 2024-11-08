@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {
   Bold,
@@ -17,11 +17,22 @@ import {
 } from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
-import {PoButtonModule, PoContainerModule, PoLoadingModule, PoMenuModule, PoPageModule} from "@po-ui/ng-components";
+import {
+  PoButtonModule,
+  PoContainerModule,
+  PoFieldModule,
+  PoLoadingModule,
+  PoMenuModule,
+  PoModalComponent,
+  PoModalModule,
+  PoPageModule
+} from "@po-ui/ng-components";
 import {ActivatedRoute} from "@angular/router";
 import {DocumentService} from "../../services/document.service";
 import {Document} from "../../models/Document";
 import {FormsModule} from "@angular/forms";
+import {CollectionService} from "../../services/collection.service";
+import {state} from "@angular/animations";
 
 @Component({
   selector: 'app-home',
@@ -33,12 +44,17 @@ import {FormsModule} from "@angular/forms";
     PoButtonModule,
     PoPageModule,
     PoLoadingModule,
-    FormsModule
+    FormsModule,
+    PoFieldModule,
+    PoModalModule
   ],
   templateUrl: './page.component.html',
   styleUrl: './page.component.css'
 })
 export class PageComponent implements OnInit {
+
+  @ViewChild('modal') modal!: PoModalComponent;  // Referência ao modal
+
   public Editor = ClassicEditor;
   public config = {
     toolbar: [
@@ -63,16 +79,16 @@ export class PageComponent implements OnInit {
       Font
     ]
   }
+
   public loading: boolean = false;
-  public document: Document = {
-    title: "",
-    content: "",
-    id: 0
-  };
+  public document: Document = {title: "", content: "", id: 0};
+  public options: { label: string; value: number }[] = [];
+  public selectedCollectionId: number = 0;
 
   constructor(
     private route: ActivatedRoute,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private collectionsService: CollectionService
   ) {
   }
 
@@ -115,4 +131,33 @@ export class PageComponent implements OnInit {
     this.document.content = event.editor.getData(); // Captura o conteúdo atualizado
   }
 
+  public openModal(): void {
+    this.loading = true;
+
+    this.collectionsService.findAll().subscribe({
+      next: (value) => {
+        this.options = value.map(collection => ({
+          label: collection.title,
+          value: collection.id
+        }));
+
+        this.loading = false;
+        this.modal.open();
+      },
+      error: () => {
+        this.loading = false;
+        console.error("Erro ao carregar coleções");
+      }
+    });
+  }
+
+  onChange(id: number) {
+    this.selectedCollectionId = id;
+  }
+
+  public createFlashCards(): void {
+
+  }
+
+  protected readonly state = state;
 }

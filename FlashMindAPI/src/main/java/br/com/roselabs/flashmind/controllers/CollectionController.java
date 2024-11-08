@@ -1,7 +1,8 @@
 package br.com.roselabs.flashmind.controllers;
 
 import br.com.roselabs.flashmind.dtos.CollectionDTO;
-import br.com.roselabs.flashmind.dtos.CollectionRequestDTO;
+import br.com.roselabs.flashmind.dtos.CreateCollectionDTO;
+import br.com.roselabs.flashmind.dtos.SimpleCollectionDTO;
 import br.com.roselabs.flashmind.services.CollectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public class CollectionController {
     private final CollectionService collectionService;
 
     @PostMapping
-    public ResponseEntity<CollectionDTO> createCollection(@RequestBody CollectionRequestDTO collectionRequestDTO) {
-        return ResponseEntity.ok(collectionService.createCollection(collectionRequestDTO));
+    public ResponseEntity<CollectionDTO> createCollection(@RequestBody CreateCollectionDTO createCollectionDTO) {
+        return ResponseEntity.ok(collectionService.createCollection(createCollectionDTO));
     }
 
     @GetMapping("/{id}")
@@ -27,13 +28,14 @@ public class CollectionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CollectionDTO>> getAllCollections() {
-        return ResponseEntity.ok(collectionService.getAllCollections());
+    public ResponseEntity<List<SimpleCollectionDTO>> getAllCollections() {
+        List<SimpleCollectionDTO> allCollections = collectionService.getAllCollections();
+        return ResponseEntity.ok(allCollections);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CollectionDTO> updateCollection(@PathVariable Long id, @RequestBody CollectionRequestDTO collectionRequestDTO) {
-        return ResponseEntity.ok(collectionService.updateCollection(id, collectionRequestDTO));
+    public ResponseEntity<CollectionDTO> updateCollection(@PathVariable Long id, @RequestBody CreateCollectionDTO createCollectionDTO) {
+        return ResponseEntity.ok(collectionService.updateCollection(id, createCollectionDTO));
     }
 
     @DeleteMapping("/{id}")

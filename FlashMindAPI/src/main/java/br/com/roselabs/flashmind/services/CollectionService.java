@@ -1,8 +1,9 @@
 package br.com.roselabs.flashmind.services;
 
 import br.com.roselabs.flashmind.dtos.CollectionDTO;
-import br.com.roselabs.flashmind.dtos.CollectionRequestDTO;
+import br.com.roselabs.flashmind.dtos.CreateCollectionDTO;
 import br.com.roselabs.flashmind.dtos.FlashCardDTO;
+import br.com.roselabs.flashmind.dtos.SimpleCollectionDTO;
 import br.com.roselabs.flashmind.entities.Collection;
 import br.com.roselabs.flashmind.entities.FlashCard;
 import br.com.roselabs.flashmind.entities.User;
@@ -25,12 +26,12 @@ public class CollectionService {
     private final CollectionRepository collectionRepository;
     private final FlashCardRepository flashCardRepository;
 
-    public CollectionDTO createCollection(CollectionRequestDTO collectionRequestDTO) {
+    public CollectionDTO createCollection(CreateCollectionDTO createCollectionDTO) {
         User user = FlashMindUtils.getLoggedUser();
         Collection collection;
-        collection = new Collection(collectionRequestDTO.getTitle(), user);
+        collection = new Collection(createCollectionDTO.getTitle(), user);
 
-        List<FlashCard> flashCards = collectionRequestDTO.getFlashCards().stream()
+        List<FlashCard> flashCards = createCollectionDTO.getFlashCards().stream()
                 .map(dto -> new FlashCard(dto.getFront(), dto.getBack(), collection))
                 .collect(Collectors.toList());
 
@@ -45,20 +46,20 @@ public class CollectionService {
         return toDTO(collection);
     }
 
-    public List<CollectionDTO> getAllCollections() {
+    public List<SimpleCollectionDTO> getAllCollections() {
         User user = FlashMindUtils.getLoggedUser();
         return collectionRepository.findAllByUser(user).stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
+                .map(SimpleCollectionDTO::new)
+                .toList();
     }
 
-    public CollectionDTO updateCollection(Long id, CollectionRequestDTO collectionRequestDTO) {
+    public CollectionDTO updateCollection(Long id, CreateCollectionDTO createCollectionDTO) {
         Collection collection = findCollectionByIdAndUser(id);
-        collection.setTitle(collectionRequestDTO.getTitle());
+        collection.setTitle(createCollectionDTO.getTitle());
 
-        List<FlashCard> flashCards = collectionRequestDTO.getFlashCards().stream()
+        List<FlashCard> flashCards = createCollectionDTO.getFlashCards().stream()
                 .map(dto -> new FlashCard(dto.getFront(), dto.getBack(), collection))
-                .collect(Collectors.toList());
+                .toList();
 
         collection.getFlashCards().clear();
         collection.getFlashCards().addAll(flashCards);

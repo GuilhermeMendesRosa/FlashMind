@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class CollectionRequestDTO {
+public class CreateCollectionDTO {
     private String title;
     private List<FlashCardRequestDTO> flashCards = new ArrayList<>();
 }
