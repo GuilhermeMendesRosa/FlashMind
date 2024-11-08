@@ -2,6 +2,7 @@ package br.com.roselabs.flashmind.controllers;
 
 import br.com.roselabs.flashmind.dtos.CollectionDTO;
 import br.com.roselabs.flashmind.dtos.CreateCollectionDTO;
+import br.com.roselabs.flashmind.dtos.FlashCardDTO;
 import br.com.roselabs.flashmind.dtos.SimpleCollectionDTO;
 import br.com.roselabs.flashmind.services.CollectionService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,11 @@ public class CollectionController {
     @PutMapping("/{id}")
     public ResponseEntity<CollectionDTO> updateCollection(@PathVariable Long id, @RequestBody CreateCollectionDTO createCollectionDTO) {
         return ResponseEntity.ok(collectionService.updateCollection(id, createCollectionDTO));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<CollectionDTO> addFlashCards(@PathVariable Long id, @RequestBody List<FlashCardDTO> flashCardDTOS) {
+        return ResponseEntity.ok(collectionService.addFlashCards(id, flashCardDTOS));
     }
 
     @DeleteMapping("/{id}")

@@ -68,6 +68,19 @@ public class CollectionService {
         return toDTO(updatedCollection);
     }
 
+    public CollectionDTO addFlashCards(Long id, List<FlashCardDTO> flashCardDTOS) {
+        Collection collection = findCollectionByIdAndUser(id);
+
+        List<FlashCard> flashCards = flashCardDTOS.stream()
+                .map(dto -> new FlashCard(dto.getFront(), dto.getBack(), collection))
+                .toList();
+
+        collection.getFlashCards().addAll(flashCards);
+        Collection updatedCollection = collectionRepository.save(collection);
+
+        return toDTO(updatedCollection);
+    }
+
     public void deleteCollection(Long id) {
         Collection collection = findCollectionByIdAndUser(id);
         flashCardRepository.deleteAllByCollection(collection);
