@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   PoButtonModule,
   PoContainerModule,
@@ -12,6 +12,7 @@ import {FlashCard} from "../../models/FlashCard";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CollectionService} from "../../services/collection.service";
 import {NgIf} from "@angular/common";
+import {AiService} from "../../services/ai.service";
 
 @Component({
   selector: 'app-create-cards',
@@ -29,7 +30,7 @@ import {NgIf} from "@angular/common";
   templateUrl: './create-cards.component.html',
   styleUrl: './create-cards.component.css'
 })
-export class CreateCardsComponent {
+export class CreateCardsComponent implements OnInit {
 
   private collectionId: number = 0;
   public currentCard: number = 0;
@@ -41,12 +42,17 @@ export class CreateCardsComponent {
   public constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private collectionsService: CollectionService) {
+    private collectionsService: CollectionService,
+    private aiService: AiService) {
   }
 
 
   ngOnInit(): void {
     this.collectionId = Number(this.route.snapshot.paramMap.get('id_collection'));
+
+    if (this.aiService.flashCards) {
+      this.flashCards = this.aiService.flashCards;
+    }
   }
 
   public createCard() {

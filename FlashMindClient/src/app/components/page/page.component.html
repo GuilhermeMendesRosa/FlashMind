@@ -15,7 +15,7 @@
   <po-container class="po-p-3">
     <div>
       <ckeditor
-        [editor]="Editor"
+        [editor]="editor"
         [config]="config"
         [(ngModel)]="document.content"
         (change)="onContentChange($event)"
@@ -35,7 +35,7 @@
   >
   </po-select>
   <po-modal-footer [p-disabled-align]="false">
-    <po-button p-kind="primary" p-label="Gerar" (p-click)="createFlashCards()"></po-button>
+    <po-button p-kind="primary" p-label="Gerar" (p-click)="generateFlashCardFromSelection()"></po-button>
   </po-modal-footer>
 </po-modal>
 

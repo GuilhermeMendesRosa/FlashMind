@@ -33,6 +33,7 @@ import {Document} from "../../models/Document";
 import {FormsModule} from "@angular/forms";
 import {CollectionService} from "../../services/collection.service";
 import {state} from "@angular/animations";
+import {AiService} from "../../services/ai.service";
 
 @Component({
   selector: 'app-home',
@@ -55,7 +56,7 @@ export class PageComponent implements OnInit {
 
   @ViewChild('modal') modal!: PoModalComponent;  // Referência ao modal
 
-  public Editor = ClassicEditor;
+  public editor = ClassicEditor;
   public config = {
     toolbar: [
       'undo', 'redo', '|',
@@ -84,12 +85,14 @@ export class PageComponent implements OnInit {
   public document: Document = {title: "", content: "", id: 0};
   public options: { label: string; value: number }[] = [];
   public selectedCollectionId: number = 0;
+  protected readonly state = state;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private documentService: DocumentService,
-    private collectionsService: CollectionService
+    private collectionsService: CollectionService,
+    private aiService: AiService
   ) {
   }
 
@@ -161,5 +164,15 @@ export class PageComponent implements OnInit {
     this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
   }
 
-  protected readonly state = state;
+  public generateFlashCardFromSelection() {
+    this.loading = true;
+    this.aiService.generateFlashCards(this.document).subscribe(flashCards => {
+      this.aiService.flashCards = flashCards;
+      if (this.selectedCollectionId != 0) {
+        this.loading = false;
+        this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
+      }
+    });
+  }
+
 }
