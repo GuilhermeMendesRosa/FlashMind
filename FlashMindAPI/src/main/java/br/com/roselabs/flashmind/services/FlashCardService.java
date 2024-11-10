@@ -1,5 +1,6 @@
 package br.com.roselabs.flashmind.services;
 
+import br.com.roselabs.flashmind.dtos.DocumentDTO;
 import br.com.roselabs.flashmind.dtos.FlashCardDTO;
 import br.com.roselabs.flashmind.dtos.FlashCardRequestDTO;
 import br.com.roselabs.flashmind.entities.Collection;
@@ -8,10 +9,14 @@ import br.com.roselabs.flashmind.entities.User;
 import br.com.roselabs.flashmind.repositories.CollectionRepository;
 import br.com.roselabs.flashmind.repositories.FlashCardRepository;
 import br.com.roselabs.flashmind.utils.FlashMindUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.openai.OpenAiChatClient;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +26,7 @@ public class FlashCardService {
 
     private final FlashCardRepository flashCardRepository;
     private final CollectionRepository collectionRepository;
+    private final OpenAiChatClient chatClient;
 
     public FlashCardDTO createFlashCard(Long collectionId, FlashCardRequestDTO flashCardRequestDTO) {
         Collection collection = findCollectionByIdAndUser(collectionId);
@@ -51,6 +57,30 @@ public class FlashCardService {
         FlashCard flashCard = findFlashCardByIdAndUser(id);
         flashCardRepository.delete(flashCard);
     }
+
+    public List<FlashCardRequestDTO> generateFlashCards(DocumentDTO documentDTO) {
+        String prompt = String.format("""
+                Eu tenho um documento intitulado %s. Com base no conteúdo desse documento, quero que você crie flashcards no estilo Anki, focados nos principais conceitos, definições e perguntas de compreensão. Cada flashcard deve ser gerado como um objeto JSON com as chaves 'front' e 'back' para a frente e o verso, respectivamente.
+                
+                Formato de resposta:
+                A resposta deve ser exclusivamente um array JSON neste formato:
+                
+                [
+                  {
+                    "front": "pergunta ou conceito no lado da frente",
+                    "back": "resposta ou explicação breve no verso"
+                  }
+                ]
+                Texto do documento: %s
+                """, documentDTO.getTitle(), documentDTO.getContent());
+
+        String json = chatClient.call(prompt);
+
+        Type listType = new TypeToken<List<FlashCardRequestDTO>>() {
+        }.getType();
+        return new Gson().fromJson(json, listType);
+    }
+
 
     private Collection findCollectionByIdAndUser(Long id) {
         User user = FlashMindUtils.getLoggedUser();
