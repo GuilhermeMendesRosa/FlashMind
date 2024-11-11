@@ -20,8 +20,7 @@ export class AiService {
   }
 
   get flashCards(): FlashCard[] {
-    let flashCards = this._flashCards;
-    return flashCards;
+    return this._flashCards;
   }
 
   set flashCards(value: FlashCard[]) {

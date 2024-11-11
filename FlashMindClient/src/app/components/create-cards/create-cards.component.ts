@@ -50,8 +50,9 @@ export class CreateCardsComponent implements OnInit {
   ngOnInit(): void {
     this.collectionId = Number(this.route.snapshot.paramMap.get('id_collection'));
 
-    if (this.aiService.flashCards) {
+    if (this.aiService.flashCards && this.aiService.flashCards.length > 0) {
       this.flashCards = this.aiService.flashCards;
+      this.aiService.flashCards = [];
     }
   }
 

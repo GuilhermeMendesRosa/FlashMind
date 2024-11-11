@@ -159,11 +159,6 @@ export class PageComponent implements OnInit {
     this.selectedCollectionId = id;
   }
 
-  public createFlashCards(): void {
-    if (this.selectedCollectionId == 0) return;
-    this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
-  }
-
   public generateFlashCardFromSelection() {
     this.loading = true;
     this.aiService.generateFlashCards(this.document).subscribe(flashCards => {
