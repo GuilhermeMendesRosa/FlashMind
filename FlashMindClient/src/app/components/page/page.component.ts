@@ -53,8 +53,8 @@ import {AiService} from "../../services/ai.service";
   styleUrl: './page.component.css'
 })
 export class PageComponent implements OnInit {
-
-  @ViewChild('modal') modal!: PoModalComponent;  // Referência ao modal
+  @ViewChild('modal') modal!: PoModalComponent;
+  private editorInstance: any;
 
   public editor = ClassicEditor;
   public config = {
@@ -63,7 +63,7 @@ export class PageComponent implements OnInit {
       'heading', '|', 'bold', 'italic', '|',
       'link', 'insertTable', 'mediaEmbed', '|',
       'bulletedList', 'numberedList', 'indent', 'outdent',
-      'fontColor', 'fontBackgroundColor',  // Adicione os controles de cor
+      'fontColor', 'fontBackgroundColor',
     ],
     plugins: [
       Bold,
@@ -132,7 +132,8 @@ export class PageComponent implements OnInit {
   }
 
   public onContentChange(event: any) {
-    this.document.content = event.editor.getData(); // Captura o conteúdo atualizado
+    // this.document.content = event.editor.getData();
+    this.editorInstance = event.editor;
   }
 
   public openModal(): void {
@@ -161,13 +162,36 @@ export class PageComponent implements OnInit {
 
   public generateFlashCardFromSelection() {
     this.loading = true;
-    this.aiService.generateFlashCards(this.document).subscribe(flashCards => {
-      this.aiService.flashCards = flashCards;
-      if (this.selectedCollectionId != 0) {
+
+    let range = this.editorInstance.editing.view.document.selection._selection._ranges[0];
+    let start = range.start.offset;
+    let end = range.end.offset;
+
+    // Define o conteúdo com base no intervalo, se start e end forem diferentes de 0
+    let content = (start !== end && start !== 0 && end !== 0)
+      ? this.document.content.slice(start + 3, end + 3)
+      : this.document.content;
+
+    let document = {
+      id: this.selectedCollectionId,
+      title: this.document.title,
+      content: content
+    };
+
+    this.aiService.generateFlashCards(document).subscribe({
+      next: (flashCards) => {
+        this.aiService.flashCards = flashCards;
+        if (this.selectedCollectionId != 0) {
+          this.loading = false;
+          this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
+        }
+      },
+      error: (err) => {
+        console.error("Erro ao gerar flashcards:", err);
         this.loading = false;
-        this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
       }
     });
   }
+
 
 }
