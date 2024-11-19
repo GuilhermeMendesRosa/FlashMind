@@ -4,14 +4,14 @@ import lombok.Data;
 
 @Data
 public class RegisterUserDto {
-    private String email;
+    private String login;
     private String password;
     private String fullName;
 
     @Override
     public String toString() {
         return "RegisterUserDto{" +
-                "email='" + email + '\'' +
+                "email='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", fullName='" + fullName + '\'' +
                 '}';

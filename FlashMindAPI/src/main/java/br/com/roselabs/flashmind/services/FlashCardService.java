@@ -63,7 +63,8 @@ public class FlashCardService {
                 Eu tenho um documento intitulado %s. Com base no conteúdo desse documento, quero que você crie flashcards no estilo Anki, focados nos principais conceitos, definições e perguntas de compreensão. Cada flashcard deve ser gerado como um objeto JSON com as chaves 'front' e 'back' para a frente e o verso, respectivamente.
                 
                 Formato de resposta:
-                A resposta deve ser exclusivamente um array JSON neste formato:
+                A resposta deve ser EXCLUSIVAMENTE um array JSON neste formato, 
+                NÃO RESPONDA NADA ALÉM DISSO:
                 
                 [
                   {

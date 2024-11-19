@@ -6,10 +6,12 @@ import {DocumentsComponent} from "./components/menu/documents/documents.componen
 import {CardsComponent} from "./components/cards/cards.component";
 import {CreateCardsComponent} from "./components/create-cards/create-cards.component";
 import {EditCardsComponent} from "./components/edit-cards/edit-cards.component";
+import {SignupComponent} from "./components/signup/signup.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'documents', pathMatch: 'full'}, // Redirecionamento da rota vazia para 'documents'
   {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
   {path: 'page/:id_document', component: PageComponent},
   {path: 'collections', component: CollectionsComponent},
   {path: 'documents', component: DocumentsComponent},
