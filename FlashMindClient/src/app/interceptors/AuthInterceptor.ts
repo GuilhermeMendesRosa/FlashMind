@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Observable, throwError} from 'rxjs';
+import {throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router) {
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
     // Pegando o token do local storage
     const token = localStorage.getItem('token');
 
@@ -24,11 +24,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
-        // Redireciona para /login se o status for 401 ou 403
-        if (error.status === 401 || error.status === 403) {
-          localStorage.removeItem("token");
-          this.router.navigate(['/login']);
-        }
+        localStorage.removeItem("token");
+        this.router.navigate(['/login']);
         return throwError(error);
       })
     );

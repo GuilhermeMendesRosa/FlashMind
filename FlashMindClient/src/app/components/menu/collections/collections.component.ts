@@ -1,4 +1,4 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {
   PoButtonModule,
   PoFieldModule,
@@ -6,13 +6,13 @@ import {
   PoListViewAction,
   PoListViewModule,
   PoLoadingModule,
+  PoModalComponent,
   PoModalModule,
   PoPageModule
 } from "@po-ui/ng-components";
 import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CollectionService} from "../../../services/collection.service";
-import {Collection} from "../../../models/Collection";
 
 @Component({
   selector: 'app-collections',
@@ -28,10 +28,14 @@ import {Collection} from "../../../models/Collection";
     FormsModule
   ],
   templateUrl: './collections.component.html',
-  styleUrl: './collections.component.css'
+  styleUrls: ['./collections.component.css']
 })
 export class CollectionsComponent implements OnInit {
+  @ViewChild('modal', { static: true }) modal!: PoModalComponent;
+
   public items: Array<any> = [];
+  public newCollectionTitle: string = "";
+  public loading: boolean = false;
 
   public readonly actions: Array<PoListViewAction> = [
     {
@@ -49,16 +53,13 @@ export class CollectionsComponent implements OnInit {
       action: this.delete.bind(this),
       type: 'danger',
       icon: 'ph ph-trash'
-    }];
-
-  public newCollectionTitle: string = "";
-  public loading: boolean = false;
+    }
+  ];
 
   constructor(
     private router: Router,
     private collectionService: CollectionService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.refresh();
@@ -95,7 +96,6 @@ export class CollectionsComponent implements OnInit {
   }
 
   private delete(collection: any) {
-    console.log(collection)
     this.loading = true;
     this.collectionService.delete(collection.id).subscribe({
       next: () => {
@@ -110,12 +110,19 @@ export class CollectionsComponent implements OnInit {
   }
 
   public createCollection() {
+    if (!this.newCollectionTitle.trim()) {
+      alert('O título não pode estar vazio.');
+      return;
+    }
+
     this.loading = true;
+
     this.collectionService.create(this.newCollectionTitle).subscribe({
       next: (collection) => {
         this.loading = false;
         this.newCollectionTitle = "";
         this.refresh();
+        this.modal.close(); // Fechar modal ao concluir
         this.openCollection(collection.id);
       },
       error: (err) => {
@@ -123,7 +130,6 @@ export class CollectionsComponent implements OnInit {
         console.error('Erro ao criar coleção:', err);
       }
     });
-
   }
 
   private openCollection(id: number) {

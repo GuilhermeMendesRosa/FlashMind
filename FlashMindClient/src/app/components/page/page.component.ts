@@ -161,30 +161,24 @@ export class PageComponent implements OnInit {
   }
 
   public generateFlashCardFromSelection() {
+    if (!this.selectedCollectionId || this.selectedCollectionId === 0) {
+      alert('Por favor, selecione uma coleção antes de gerar os flashcards.');
+      return;
+    }
+
     this.loading = true;
 
-    let range = this.editorInstance.editing.view.document.selection._selection._ranges[0];
-    let start = range.start.offset;
-    let end = range.end.offset;
-
-    // Define o conteúdo com base no intervalo, se start e end forem diferentes de 0
-    let content = (start !== end && start !== 0 && end !== 0)
-      ? this.document.content.slice(start + 3, end + 3)
-      : this.document.content;
-
-    let document = {
+    const document = {
       id: this.selectedCollectionId,
       title: this.document.title,
-      content: content
+      content: this.document.content
     };
 
     this.aiService.generateFlashCards(document).subscribe({
       next: (flashCards) => {
         this.aiService.flashCards = flashCards;
-        if (this.selectedCollectionId != 0) {
-          this.loading = false;
-          this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
-        }
+        this.loading = false;
+        this.router.navigate([`/collections/create-cards/${this.selectedCollectionId}`]);
       },
       error: (err) => {
         console.error("Erro ao gerar flashcards:", err);
@@ -192,6 +186,5 @@ export class PageComponent implements OnInit {
       }
     });
   }
-
 
 }

@@ -29,19 +29,18 @@ import {FormsModule} from "@angular/forms";
     FormsModule
   ],
   templateUrl: './documents.component.html',
-  styleUrl: './documents.component.css'
+  styleUrls: ['./documents.component.css']
 })
 export class DocumentsComponent implements OnInit, OnChanges {
   public height: number = 120;
   public documents: Document[] = [];
-    public loading: boolean = false;
+  public loading: boolean = false;
   public newDocumentTitle: string = "";
 
   constructor(
     private router: Router,
     private documentService: DocumentService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.refresh();
@@ -71,19 +70,31 @@ export class DocumentsComponent implements OnInit, OnChanges {
 
   public deleteDocument(id: number) {
     this.loading = true;
-    this.documentService.delete(id).subscribe(value => {
-      this.loading = false;
-      this.refresh()
+    this.documentService.delete(id).subscribe({
+      next: () => {
+        this.loading = false;
+        this.refresh();
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erro ao excluir documento:', err);
+      }
     });
   }
 
   public createDocument() {
+    if (!this.newDocumentTitle.trim()) {
+      alert('O título do documento não pode estar vazio.');
+      return;
+    }
+
     this.loading = true;
     this.documentService.create(this.newDocumentTitle).subscribe({
       next: (document) => {
         this.loading = false;
         this.newDocumentTitle = "";
-        this.openDocument(document.id)
+        this.refresh();
+        this.openDocument(document.id);
       },
       error: (err) => {
         this.loading = false;
@@ -91,5 +102,4 @@ export class DocumentsComponent implements OnInit, OnChanges {
       }
     });
   }
-
 }
