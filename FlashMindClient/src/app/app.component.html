@@ -1,5 +1,8 @@
 <!-- seu-componente.component.html -->
 <div class="po-wrapper">
+  <app-navbar
+    *ngIf="showMenu">
+  </app-navbar>
   <po-menu
     *ngIf="showMenu"
     [p-menus]="menus"
