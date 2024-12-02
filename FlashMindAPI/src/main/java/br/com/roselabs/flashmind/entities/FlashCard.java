@@ -18,8 +18,10 @@ public class FlashCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "TEXT")
     private String front;
 
+    @Column(columnDefinition = "TEXT")
     private String back;
 
     @ManyToOne
