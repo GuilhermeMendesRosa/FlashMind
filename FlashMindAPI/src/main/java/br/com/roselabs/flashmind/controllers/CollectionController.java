@@ -7,6 +7,8 @@ import br.com.roselabs.flashmind.dtos.SimpleCollectionDTO;
 import br.com.roselabs.flashmind.services.CollectionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +24,7 @@ public class CollectionController {
     @PostMapping
     @Transactional
     public ResponseEntity<CollectionDTO> createCollection(@RequestBody CreateCollectionDTO createCollectionDTO) {
-        return ResponseEntity.ok(collectionService.createCollection(createCollectionDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(collectionService.createCollection(createCollectionDTO));
     }
 
     @GetMapping("/{id}")

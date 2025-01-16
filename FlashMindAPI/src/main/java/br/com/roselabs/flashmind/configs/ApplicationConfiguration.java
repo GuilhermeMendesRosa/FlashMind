@@ -1,6 +1,8 @@
 package br.com.roselabs.flashmind.configs;
 
 import br.com.roselabs.flashmind.repositories.UserRepository;
+import br.com.roselabs.flashmind.services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,21 +14,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
+@AllArgsConstructor
 public class ApplicationConfiguration {
-    private final UserRepository userRepository;
 
-    public ApplicationConfiguration(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserService userService;
 
     @Bean
-    UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }
-
-    @Bean
-    BCryptPasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -39,7 +33,7 @@ public class ApplicationConfiguration {
     AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userService);
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;

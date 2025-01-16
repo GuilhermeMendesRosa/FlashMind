@@ -5,6 +5,7 @@ import br.com.roselabs.flashmind.dtos.FlashCardRequestDTO;
 import br.com.roselabs.flashmind.services.FlashCardService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class FlashCardController {
     @PostMapping
     @Transactional
     public ResponseEntity<FlashCardDTO> createFlashCard(@PathVariable Long collectionId, @RequestBody FlashCardRequestDTO flashCardRequestDTO) {
-        return ResponseEntity.ok(flashCardService.createFlashCard(collectionId, flashCardRequestDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(flashCardService.createFlashCard(collectionId, flashCardRequestDTO));
     }
 
     @GetMapping("/{id}")

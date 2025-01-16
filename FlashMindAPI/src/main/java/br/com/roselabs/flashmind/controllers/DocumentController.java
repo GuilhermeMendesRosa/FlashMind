@@ -4,7 +4,8 @@ import br.com.roselabs.flashmind.dtos.DocumentDTO;
 import br.com.roselabs.flashmind.dtos.FindAllDocumentDTO;
 import br.com.roselabs.flashmind.services.DocumentService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,16 +13,16 @@ import java.util.List;
 
 @RequestMapping("/documents")
 @RestController
+@AllArgsConstructor
 public class DocumentController {
 
-    @Autowired
-    private DocumentService documentService;
+    private final DocumentService documentService;
 
     @PostMapping("/create")
     @Transactional
     public ResponseEntity<DocumentDTO> create(@RequestBody DocumentDTO documentDTO) {
         DocumentDTO createdDocument = this.documentService.create(documentDTO);
-        return ResponseEntity.ok(createdDocument);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDocument);
     }
 
     @GetMapping

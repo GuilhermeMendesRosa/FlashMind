@@ -2,6 +2,7 @@ package br.com.roselabs.flashmind.controllers;
 
 import br.com.roselabs.flashmind.entities.User;
 import br.com.roselabs.flashmind.services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,12 +14,10 @@ import java.util.List;
 
 @RequestMapping("/users")
 @RestController
+@AllArgsConstructor
 public class UserController {
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
