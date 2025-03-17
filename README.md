@@ -1,9 +1,6 @@
-# 🧠 FlashMind
+# 🧠 <a href="https://flash-mind-project.vercel.app/">FlashMind<a/>
 
 <div align="center">
-  
-  ![FlashMind Demo](https://private-user-images.githubusercontent.com/83733948/378864871-f0068ab6-d0e9-415c-a291-b842dbaf7824.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjk2MDQ4NzksIm5iZiI6MTcyOTYwNDU3OSwicGF0aCI6Ii84MzczMzk0OC8zNzg4NjQ4NzEtZjAwNjhhYjYtZDBlOS00MTVjLWEyOTEtYjg0MmRiYWY3ODI0LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDIyVDEzNDI1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTkxODcyNWIzN2YwNzQ1NGZhOWU4MDMwMjA3OGY5ZDc0MTA0MzFkNzNjOTY3MmVkOTJhYTJiM2JhMzcyY2JhNTImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.wuvAd1SfznjyAhCmQqpiClgKK_1gDjI6WP1Tn0Z_Vto)
-  
   ### 📚 Sua plataforma inteligente de estudos com flashcards
 </div>
 
