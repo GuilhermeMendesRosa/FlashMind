@@ -9,7 +9,7 @@ import {PoPageLogin} from "@po-ui/ng-templates";
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:8080'
+  private readonly API_URL = 'https://flashmind-production.up.railway.app'
 
   constructor(private http: HttpClient) {
   }
