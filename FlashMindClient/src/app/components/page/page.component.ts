@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {
   Bold,
@@ -132,7 +132,7 @@ export class PageComponent implements OnInit {
   }
 
   public onContentChange(event: any) {
-    // this.document.content = event.editor.getData();
+    this.document.content = event.editor.getData();
     this.editorInstance = event.editor;
   }
 
@@ -185,6 +185,14 @@ export class PageComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 's') {
+      event.preventDefault();
+      this.updateDocument();
+    }
   }
 
 }
